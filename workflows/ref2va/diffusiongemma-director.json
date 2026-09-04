@@ -1,0 +1,2519 @@
+{
+  "id": "c817c234-9960-4f6d-bf53-d1e32b8102cc",
+  "revision": 0,
+  "last_node_id": 67,
+  "last_link_id": 152,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        -3918.2647345461423,
+        -2063.448341773268
+      ],
+      "size": [
+        619.96875,
+        85.953125
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "FastH3VSAPatch",
+      "pos": [
+        -2526.328507802163,
+        -1995.231279386189
+      ],
+      "size": [
+        431.859375,
+        217.890625
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            33,
+            34
+          ]
+        },
+        {
+          "name": "preflight",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "exportAnything/ComfyUI-FastH3-VSA",
+        "ver": "c1798183d89f7143d021c16507e4bb7ac0b3decc",
+        "Node name for S&R": "FastH3VSAPatch"
+      },
+      "widgets_values": [
+        12,
+        0,
+        "error",
+        true,
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 4,
+      "type": "CLIPLoader",
+      "pos": [
+        -3915.6121235919904,
+        -1900.9999347060646
+      ],
+      "size": [
+        619.96875,
+        120
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            132
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ]
+    },
+    {
+      "id": 7,
+      "type": "RandomNoise",
+      "pos": [
+        -2527.142412694189,
+        -2133.0884271513223
+      ],
+      "size": [
+        420.890625,
+        81.984375
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        496460405831041,
+        "fixed"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "BasicGuider",
+      "pos": [
+        -2027.7975245211996,
+        -2052.389074297676
+      ],
+      "size": [
+        300,
+        57.5
+      ],
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 33
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 140
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "KSamplerSelect",
+      "pos": [
+        -2023.771721908895,
+        -1929.973713952896
+      ],
+      "size": [
+        300,
+        64.78125
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "BasicScheduler",
+      "pos": [
+        -2018.9410012193332,
+        -1790.3118063329962
+      ],
+      "size": [
+        300,
+        126.25
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "bong_tangent",
+        4,
+        0.85
+      ]
+    },
+    {
+      "id": 11,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        -1660.0472847714593,
+        -2044.9451373453971
+      ],
+      "size": [
+        306.859375,
+        126.25
+      ],
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 8
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 9
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 10
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 11
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 141
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            13,
+            15
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        -1622.7929013319929,
+        -1791.7354840208864
+      ],
+      "size": [
+        224.984375,
+        0
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 105
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            100
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "VAELoader",
+      "pos": [
+        -3910.7082659178427,
+        -1716.1361914610031
+      ],
+      "size": [
+        613.71875,
+        61.953125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            72,
+            134
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        -1623.5343173574304,
+        -1851.1692423253908
+      ],
+      "size": [
+        224.984375,
+        0
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 15
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 72
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAEDecodeAudio"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 18,
+      "type": "LoadImage",
+      "pos": [
+        -5503.023004545592,
+        -3340.6982104849935
+      ],
+      "size": [
+        1049.171875,
+        620.75
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            106
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "user-input/ref2va/composition.png",
+        "image"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 19,
+      "type": "MarkdownNote",
+      "pos": [
+        -2245.768014202791,
+        -3362.93752463531
+      ],
+      "size": [
+        390.765625,
+        505.078125
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Note: Size Settings Reference",
+      "properties": {},
+      "widgets_values": [
+        "| megapixels | Aspect | Output (multiple=32) |\n|---|---|---|\n| 0.2 | 16:9 | 608 x 352 |\n| 0.3 | 16:9 | 736 x 416 |\n| 0.4 | 16:9 | 864 x 480 |\n| 0.5 | 16:9 | 960 x 544 |\n| 0.6 | 16:9 | 1056 x 608 |\n| 0.7 | 16:9 | 1152 x 640 |\n| 0.8 | 16:9 | 1216 x 672 |\n| 0.9 | 16:9 | 1280 x 736 |\n| 0.98 | 16:9 | 1344 x 768 |\n| 1.0 | 16:9 | 1376 x 768 |\n| 1.2 | 16:9 | 1504 x 832 |\n| 1.5 | 16:9 | 1664 x 928 |\n| 1.8 | 16:9 | 1824 x 1024 |\n| 2.0 | 16:9 | 1920 x 1088 |\n"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 22,
+      "type": "DLSS5NeuralRendering",
+      "pos": [
+        -1694.3827910168047,
+        -2730.1465982822956
+      ],
+      "size": [
+        343.75,
+        393.8125
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 99
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "exportAnything/ComfyUI-DLSS5-NR-Temporal",
+        "ver": "81171d18bc2a359d75cace2eadf13efc757d9b2d",
+        "Node name for S&R": "DLSS5NeuralRendering"
+      },
+      "widgets_values": [
+        "natural",
+        0,
+        1,
+        1,
+        1,
+        -1,
+        true,
+        "temporal sequence",
+        0,
+        "auto",
+        true,
+        0.24
+      ]
+    },
+    {
+      "id": 23,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        -1239.1727686421461,
+        -2995.331275235765
+      ],
+      "size": [
+        1786.75,
+        1295.046875
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 28
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 30
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "1.7.9",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "MiniMax_FastH3_Ref2VA_Director",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true
+      },
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 26,
+      "type": "GetImageSizeAndCount",
+      "pos": [
+        -2016.8916271210478,
+        -1569.8012880508434
+      ],
+      "size": [
+        300,
+        117.921875
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 108
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": []
+        },
+        {
+          "label": "1024 width",
+          "name": "width",
+          "type": "INT",
+          "links": [
+            86
+          ]
+        },
+        {
+          "label": "512 height",
+          "name": "height",
+          "type": "INT",
+          "links": [
+            87
+          ]
+        },
+        {
+          "label": "1 count",
+          "name": "count",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.4.8",
+        "Node name for S&R": "GetImageSizeAndCount"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 37,
+      "type": "ComfyMathExpression",
+      "pos": [
+        -3527.961065146744,
+        -1373.8284267426307
+      ],
+      "size": [
+        224.984375,
+        0
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "a",
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 122
+        },
+        {
+          "label": "b",
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            139
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
+      ]
+    },
+    {
+      "id": 44,
+      "type": "VAELoader",
+      "pos": [
+        -3905.8668485230924,
+        -1562.5656753732794
+      ],
+      "size": [
+        613.71875,
+        61.953125
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            105,
+            133
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_h3_video_vae_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "RTXVideoSuperResolution",
+      "pos": [
+        -1685.1290482486393,
+        -2941.539166117609
+      ],
+      "size": [
+        338.109375,
+        141.90625
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 100
+        }
+      ],
+      "outputs": [
+        {
+          "name": "upscaled_images",
+          "type": "IMAGE",
+          "links": [
+            101
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_nvidia_rtx_nodes",
+        "ver": "0.1.3",
+        "Node name for S&R": "RTXVideoSuperResolution"
+      },
+      "widgets_values": [
+        "scale by multiplier",
+        2,
+        "ULTRA"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 47,
+      "type": "ImageResize+",
+      "pos": [
+        -1665.3469567876984,
+        -1710.7956985988253
+      ],
+      "size": [
+        313.109375,
+        265.859375
+      ],
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 101
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 86
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 87
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            99
+          ]
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": []
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": []
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui_essentials",
+        "ver": "1.1.0",
+        "Node name for S&R": "ImageResize+"
+      },
+      "widgets_values": [
+        512,
+        512,
+        "lanczos",
+        "stretch",
+        "always",
+        1
+      ]
+    },
+    {
+      "id": 50,
+      "type": "Image Resize (rgthree)",
+      "pos": [
+        -4387.406437759092,
+        -3005.0425707871927
+      ],
+      "size": [
+        345.3125,
+        237.875
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 106
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            108,
+            135,
+            147
+          ]
+        },
+        {
+          "name": "WIDTH",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "HEIGHT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2607232129",
+        "Node name for S&R": "Image Resize (rgthree)"
+      },
+      "widgets_values": [
+        "pixels",
+        1024,
+        512,
+        "contain",
+        "nearest-exact"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 51,
+      "type": "DiffusionGemmaModelLoader",
+      "pos": [
+        -3902.3922112432983,
+        -2657.270580381425
+      ],
+      "size": [
+        595.859375,
+        309.84375
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model_config",
+          "type": "DG_MODEL_CONFIG",
+          "links": [
+            111
+          ]
+        },
+        {
+          "name": "runtime_status_json",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "3. Load Director (unloads before H3)",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaModelLoader",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        "models/LLM/diffusiongemma-26B-A4B-it-NVFP4",
+        "transformers_inprocess",
+        "auto",
+        "modelopt_nvfp4",
+        true,
+        "unload_after_run",
+        "20.0 GB - safe practical",
+        0.35
+      ]
+    },
+    {
+      "id": 52,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        -3854.4105576073393,
+        -3262.3885202425245
+      ],
+      "size": [
+        494.359375,
+        314.359375
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            109
+          ]
+        }
+      ],
+      "title": "1. Creative brief",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.24.0",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "Create exactly one continuous 10-second realistic live-action cable-news split-screen discussion grounded only in the three supplied references. Use exactly two independently tracked people and no one else. <Picture 1> supplies only the locked split-screen news-studio composition, left-right blocking, camera height, backgrounds, and lighting. Do not reproduce its logo, lower-third, branding, captions, or visible text. <Subject 1> is the left speaker from <Picture 2>. <Subject 2> is the right speaker from <Picture 3>. Preserve their faces, hair, suits, shirts, ties, microphones, proportions, and left-right positions.\n\nThe fictional discussion draws on the moral premise of the Injustice comic series: superpowered people become dangerous when their power places them beyond institutional accountability. No superhero, costume, illustration, or B-roll appears.\n\nUse one locked medium split-screen shot with no cuts, zooms, pans, reframing, or transitions. <Subject 1> looks into camera with measured concern and says exactly, “Supermen roaming the country unchecked could impose their will anywhere.” He closes his lips and listens. After a short natural beat, <Subject 2> gives a restrained nod and replies gravely, “If no one can hold them accountable, raw power becomes law.” His lips close. Use natural blinking, restrained head movement, precise lip synchronization, and no overlapping speech. The non-speaking subject remains attentive and silent. End with both men composed and concerned in the unchanged split-screen. Exactly one shot and exactly two English dialogue lines."
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 53,
+      "type": "DiffusionGemmaH3ReferenceContext",
+      "pos": [
+        -3251.472447175864,
+        -3354.6492320100497
+      ],
+      "size": [
+        425.609375,
+        414.359375
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "user_prompt",
+          "type": "STRING",
+          "link": 109
+        },
+        {
+          "name": "reference_images",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 149
+        },
+        {
+          "name": "reference_video",
+          "shape": 7,
+          "type": "VIDEO",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "gemma_context",
+          "type": "DG_CONTEXT",
+          "links": [
+            112,
+            115
+          ]
+        },
+        {
+          "name": "context_json",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "context_preview",
+          "type": "STRING",
+          "links": []
+        }
+      ],
+      "title": "4. H3 ordered reference context — one image",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaH3ReferenceContext",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        "",
+        1,
+        60,
+        60,
+        "trim",
+        "",
+        "custom",
+        0
+      ]
+    },
+    {
+      "id": 54,
+      "type": "DiffusionGemmaMiniMaxH3TargetProfile",
+      "pos": [
+        -3249.41725333968,
+        -2867.3886621059555
+      ],
+      "size": [
+        438.109375,
+        533.8125
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "target_duration_seconds",
+          "type": "FLOAT",
+          "widget": {
+            "name": "target_duration_seconds"
+          },
+          "link": 110
+        }
+      ],
+      "outputs": [
+        {
+          "name": "target_profile_config",
+          "type": "DG_TARGET_PROFILE_CONFIG",
+          "links": [
+            113,
+            116
+          ]
+        },
+        {
+          "name": "target_profile_json",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "5. MiniMax-H3 target profile",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaMiniMaxH3TargetProfile",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        "ref2va",
+        10,
+        "explicit_sound_design",
+        "Clean close-miked English broadcast voices with faint neutral studio room tone. Subject 1 speaks first, followed by a short natural pause, then Subject 2. No overlapping speech, narrator, voice-over, audience, crowd, broadcast sting, sound effects, or music.",
+        "1",
+        12,
+        "required",
+        2,
+        "Exactly two English lines, spoken verbatim. <Subject 1> (S1), measured concern: “Supermen roaming the country unchecked could impose their will anywhere.” <Subject 2> (S2), grave firmness: “If no one can hold them accountable, raw power becomes law.” S1 must finish before S2 begins. Do not add, omit, repeat, or paraphrase any words.",
+        "custom",
+        "No additional people, superheroes, costumes, B-roll, cutaways, camera movement, split-screen drift, subject swapping, duplicated faces, blended identities, changed wardrobe, contact-sheet grids, labels, logos, lower-thirds, captions, subtitles, visible text, warped mouths, listening-subject lip movement, overlapping dialogue, narration, audience noise, or music.",
+        0
+      ]
+    },
+    {
+      "id": 55,
+      "type": "PrimitiveFloat",
+      "pos": [
+        -3846.3013229357116,
+        -2874.9231440539616
+      ],
+      "size": [
+        488.109375,
+        93.328125
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            110,
+            122
+          ]
+        }
+      ],
+      "title": "2. Duration seconds (shared)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.7.0",
+        "Node name for S&R": "PrimitiveFloat",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        10
+      ],
+      "color": "#223322",
+      "bgcolor": "#355335"
+    },
+    {
+      "id": 56,
+      "type": "DiffusionGemmaCoTGenerator",
+      "pos": [
+        -2741.350332283085,
+        -2698.2453432743137
+      ],
+      "size": [
+        389.125,
+        353.84375
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_config",
+          "type": "DG_MODEL_CONFIG",
+          "link": 111
+        },
+        {
+          "name": "gemma_context",
+          "type": "DG_CONTEXT",
+          "link": 112
+        },
+        {
+          "name": "target_profile_config",
+          "type": "DG_TARGET_PROFILE_CONFIG",
+          "link": 113
+        },
+        {
+          "name": "grounding_guard_config",
+          "shape": 7,
+          "type": "DG_GROUNDING_GUARD_CONFIG",
+          "link": null
+        },
+        {
+          "name": "measured_audio_report_json",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        },
+        {
+          "name": "h3_reference_policy",
+          "shape": 7,
+          "type": "DG_H3_REFERENCE_POLICY_CONFIG",
+          "link": 142
+        }
+      ],
+      "outputs": [
+        {
+          "name": "final_json",
+          "type": "STRING",
+          "links": [
+            114
+          ]
+        },
+        {
+          "name": "reasoning_text",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "raw_response",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "metadata_json",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "grounding_status",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "grounding_report_json",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "6. Write strict H3 prompt",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaCoTGenerator",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        0.45,
+        "faithful",
+        0.2,
+        "off",
+        1280,
+        "reuse",
+        "off"
+      ]
+    },
+    {
+      "id": 62,
+      "type": "DiffusionGemmaH3ReferencePolicy",
+      "pos": [
+        -2249.986009728403,
+        -2792.202232675712
+      ],
+      "size": [
+        394.359375,
+        251.859375
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "reference_policy_config",
+          "type": "DG_H3_REFERENCE_POLICY_CONFIG",
+          "links": [
+            142
+          ]
+        },
+        {
+          "name": "policy_json",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "policy_preview",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "5a. Reference roles - Auto or contact sheet",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaH3ReferencePolicy",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        "Custom manifest",
+        2,
+        "<Picture 1>: [dg:count,environment,lighting,spatial,composition,camera,text] sole authority for the locked two-person split-screen broadcast composition, left-right blocking, camera height, newsroom backgrounds, and studio lighting; do not transfer its logo, lower-third, captions, branding, or visible text.\n<Picture 2>: [dg:identity,appearance,object,color] sole authority for <Subject 1>, the left speaker's face, brown side-parted hair, navy suit, white shirt, burgundy patterned tie, and lapel microphone; preserve fully and do not duplicate or blend.\n<Picture 3>: [dg:identity,appearance,object,color] sole authority for <Subject 2>, the right speaker's face, gray side-parted hair, black suit, white shirt, pale violet tie, pocket square, and lapel microphone; preserve fully and do not duplicate or blend."
+      ],
+      "color": "#223322",
+      "bgcolor": "#355335"
+    },
+    {
+      "id": 57,
+      "type": "DiffusionGemmaJSONSplitter",
+      "pos": [
+        -2727.5771679182385,
+        -3355.213761616307
+      ],
+      "size": [
+        404.25,
+        529.796875
+      ],
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "final_json",
+          "type": "STRING",
+          "link": 114
+        },
+        {
+          "name": "gemma_context",
+          "shape": 7,
+          "type": "DG_CONTEXT",
+          "link": 115
+        },
+        {
+          "name": "target_profile_config",
+          "shape": 7,
+          "type": "DG_TARGET_PROFILE_CONFIG",
+          "link": 116
+        },
+        {
+          "name": "resolution_aspect_ratio_override",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ltx_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "ideogram_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "negative_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "aspect_ratio",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "metadata_json",
+          "type": "STRING",
+          "links": [
+            120
+          ]
+        },
+        {
+          "name": "scene_segments_json",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "local_prompts",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "segment_lengths",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "is_valid",
+          "type": "BOOLEAN",
+          "links": null
+        },
+        {
+          "name": "resolution_selector_preset",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "resolution_width",
+          "type": "INT",
+          "links": [
+            137
+          ]
+        },
+        {
+          "name": "resolution_height",
+          "type": "INT",
+          "links": [
+            138
+          ]
+        },
+        {
+          "name": "ready_for_generation",
+          "type": "BOOLEAN",
+          "links": [
+            119
+          ]
+        },
+        {
+          "name": "minimax_h3_prompt",
+          "type": "STRING",
+          "links": []
+        },
+        {
+          "name": "candidate_ltx_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "candidate_negative_prompt",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "candidate_minimax_h3_prompt",
+          "type": "STRING",
+          "links": [
+            118
+          ]
+        }
+      ],
+      "title": "7. Route H3 prompt + resolution",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaJSONSplitter",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        "",
+        1,
+        32,
+        "16:9 (Widescreen)"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 58,
+      "type": "PreviewAny",
+      "pos": [
+        -3239.117351758258,
+        -2142.2829034595757
+      ],
+      "size": [
+        660.6875,
+        811.359375
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 131
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            136
+          ]
+        }
+      ],
+      "title": "Generated MiniMax-H3 prompt",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.15.1",
+        "Node name for S&R": "PreviewAny",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 59,
+      "type": "DiffusionGemmaGenerationGate",
+      "pos": [
+        -2241.5882135915203,
+        -2474.872826204577
+      ],
+      "size": [
+        384.546875,
+        145
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 118
+        },
+        {
+          "name": "ready_for_generation",
+          "type": "BOOLEAN",
+          "link": 119
+        },
+        {
+          "name": "metadata_json",
+          "shape": 7,
+          "type": "STRING",
+          "link": 120
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            131
+          ]
+        }
+      ],
+      "title": "8. CONNECT THIS OUTPUT → MiniMax H3 prompt",
+      "properties": {
+        "cnr_id": "diffusiongemma-prompt-builder",
+        "ver": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "Node name for S&R": "DiffusionGemmaGenerationGate",
+        "aux_id": "exportAnything/ComfyUI-DiffusionGemmaPromptBuilder"
+      },
+      "widgets_values": [
+        "strict"
+      ],
+      "color": "#5b2222",
+      "bgcolor": "#8b3333"
+    },
+    {
+      "id": 61,
+      "type": "MiniMaxH3ReferenceToVideo",
+      "pos": [
+        -2516.501860320997,
+        -1723.5842889568269
+      ],
+      "size": [
+        419.359375,
+        393.84375
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 132
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 133
+        },
+        {
+          "name": "audio_vae",
+          "type": "VAE",
+          "link": 134
+        },
+        {
+          "label": "ref_image_0",
+          "name": "ref_images.ref_image_0",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 135
+        },
+        {
+          "label": "ref_image_1",
+          "name": "ref_images.ref_image_1",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 145
+        },
+        {
+          "label": "ref_image_2",
+          "name": "ref_images.ref_image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 152
+        },
+        {
+          "label": "ref_image_3",
+          "name": "ref_images.ref_image_3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "ref_video_0",
+          "name": "ref_videos.ref_video_0",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "label": "ref_video_audio_0",
+          "name": "ref_video_audios.ref_video_audio_0",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "label": "ref_audio_0",
+          "name": "ref_audios.ref_audio_0",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 136
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 137
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 138
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 139
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            140
+          ]
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            141
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "MiniMaxH3ReferenceToVideo"
+      },
+      "widgets_values": [
+        "",
+        1344,
+        768,
+        124,
+        "match"
+      ]
+    },
+    {
+      "id": 63,
+      "type": "LoadImage",
+      "pos": [
+        -5514.0665124641,
+        -2648.3331870289685
+      ],
+      "size": [
+        1054.78125,
+        618.84375
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            146
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "user-input/ref2va/subject-left.png",
+        "image"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 64,
+      "type": "ImageBatchMulti",
+      "pos": [
+        -4372.54947234773,
+        -3338.5566829606655
+      ],
+      "size": [
+        335.015625,
+        153.90625
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 147
+        },
+        {
+          "name": "image_2",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 148
+        },
+        {
+          "name": "image_3",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 150
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            149
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-kjnodes",
+        "ver": "1.4.8",
+        "Node name for S&R": "ImageBatchMulti"
+      },
+      "widgets_values": [
+        3,
+        null
+      ]
+    },
+    {
+      "id": 65,
+      "type": "Image Resize (rgthree)",
+      "pos": [
+        -4391.1160209747795,
+        -2320.987598879304
+      ],
+      "size": [
+        345.296875,
+        237.875
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 146
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            145,
+            148
+          ]
+        },
+        {
+          "name": "WIDTH",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "HEIGHT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2607232129",
+        "Node name for S&R": "Image Resize (rgthree)"
+      },
+      "widgets_values": [
+        "pixels",
+        1024,
+        512,
+        "contain",
+        "nearest-exact"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 66,
+      "type": "LoadImage",
+      "pos": [
+        -5506.982223379363,
+        -1944.3359375269338
+      ],
+      "size": [
+        1044.96875,
+        612.296875
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            151
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "user-input/ref2va/subject-right.png",
+        "image"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 67,
+      "type": "Image Resize (rgthree)",
+      "pos": [
+        -4392.2683825567165,
+        -1643.5411262587563
+      ],
+      "size": [
+        345.28125,
+        237.875
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 151
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            150,
+            152
+          ]
+        },
+        {
+          "name": "WIDTH",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "name": "HEIGHT",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "rgthree-comfy",
+        "ver": "1.0.2607232129",
+        "Node name for S&R": "Image Resize (rgthree)"
+      },
+      "widgets_values": [
+        "pixels",
+        1024,
+        512,
+        "contain",
+        "nearest-exact"
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    }
+  ],
+  "links": [
+    [
+      8,
+      7,
+      0,
+      11,
+      0,
+      "NOISE"
+    ],
+    [
+      9,
+      8,
+      0,
+      11,
+      1,
+      "GUIDER"
+    ],
+    [
+      10,
+      9,
+      0,
+      11,
+      2,
+      "SAMPLER"
+    ],
+    [
+      11,
+      10,
+      0,
+      11,
+      3,
+      "SIGMAS"
+    ],
+    [
+      13,
+      11,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      11,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      1,
+      0,
+      2,
+      0,
+      "MODEL"
+    ],
+    [
+      28,
+      22,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      30,
+      17,
+      0,
+      23,
+      1,
+      "AUDIO"
+    ],
+    [
+      33,
+      2,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      34,
+      2,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      72,
+      16,
+      0,
+      17,
+      1,
+      "VAE"
+    ],
+    [
+      86,
+      26,
+      1,
+      47,
+      1,
+      "INT"
+    ],
+    [
+      87,
+      26,
+      2,
+      47,
+      2,
+      "INT"
+    ],
+    [
+      99,
+      47,
+      0,
+      22,
+      0,
+      "IMAGE"
+    ],
+    [
+      100,
+      12,
+      0,
+      45,
+      0,
+      "IMAGE"
+    ],
+    [
+      101,
+      45,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ],
+    [
+      105,
+      44,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      106,
+      18,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      108,
+      50,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      109,
+      52,
+      0,
+      53,
+      0,
+      "STRING"
+    ],
+    [
+      110,
+      55,
+      0,
+      54,
+      0,
+      "FLOAT"
+    ],
+    [
+      111,
+      51,
+      0,
+      56,
+      0,
+      "DG_MODEL_CONFIG"
+    ],
+    [
+      112,
+      53,
+      0,
+      56,
+      1,
+      "DG_CONTEXT"
+    ],
+    [
+      113,
+      54,
+      0,
+      56,
+      2,
+      "DG_TARGET_PROFILE_CONFIG"
+    ],
+    [
+      114,
+      56,
+      0,
+      57,
+      0,
+      "STRING"
+    ],
+    [
+      115,
+      53,
+      0,
+      57,
+      1,
+      "DG_CONTEXT"
+    ],
+    [
+      116,
+      54,
+      0,
+      57,
+      2,
+      "DG_TARGET_PROFILE_CONFIG"
+    ],
+    [
+      118,
+      57,
+      16,
+      59,
+      0,
+      "STRING"
+    ],
+    [
+      119,
+      57,
+      12,
+      59,
+      1,
+      "BOOLEAN"
+    ],
+    [
+      120,
+      57,
+      4,
+      59,
+      2,
+      "STRING"
+    ],
+    [
+      122,
+      55,
+      0,
+      37,
+      0,
+      "FLOAT"
+    ],
+    [
+      131,
+      59,
+      0,
+      58,
+      0,
+      "STRING"
+    ],
+    [
+      132,
+      4,
+      0,
+      61,
+      0,
+      "CLIP"
+    ],
+    [
+      133,
+      44,
+      0,
+      61,
+      1,
+      "VAE"
+    ],
+    [
+      134,
+      16,
+      0,
+      61,
+      2,
+      "VAE"
+    ],
+    [
+      135,
+      50,
+      0,
+      61,
+      3,
+      "IMAGE"
+    ],
+    [
+      136,
+      58,
+      0,
+      61,
+      10,
+      "STRING"
+    ],
+    [
+      137,
+      57,
+      10,
+      61,
+      11,
+      "INT"
+    ],
+    [
+      138,
+      57,
+      11,
+      61,
+      12,
+      "INT"
+    ],
+    [
+      139,
+      37,
+      1,
+      61,
+      13,
+      "INT"
+    ],
+    [
+      140,
+      61,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      141,
+      61,
+      1,
+      11,
+      4,
+      "LATENT"
+    ],
+    [
+      142,
+      62,
+      0,
+      56,
+      5,
+      "DG_H3_REFERENCE_POLICY_CONFIG"
+    ],
+    [
+      145,
+      65,
+      0,
+      61,
+      4,
+      "IMAGE"
+    ],
+    [
+      146,
+      63,
+      0,
+      65,
+      0,
+      "IMAGE"
+    ],
+    [
+      147,
+      50,
+      0,
+      64,
+      0,
+      "IMAGE"
+    ],
+    [
+      148,
+      65,
+      0,
+      64,
+      1,
+      "IMAGE"
+    ],
+    [
+      149,
+      64,
+      0,
+      53,
+      1,
+      "IMAGE"
+    ],
+    [
+      150,
+      67,
+      0,
+      64,
+      2,
+      "IMAGE"
+    ],
+    [
+      151,
+      66,
+      0,
+      67,
+      0,
+      "IMAGE"
+    ],
+    [
+      152,
+      67,
+      0,
+      61,
+      5,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Group",
+      "bounding": [
+        -3955.8794440510815,
+        -2225.4184752435694,
+        2646.247097438528,
+        928.9532559250247
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Load Image + Adjust Resize (if needed)",
+      "bounding": [
+        -5525.266525251443,
+        -3438.0238968266863,
+        1530.5381307439707,
+        2136.6533115535385
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "DLSS 5 Neural Rendering",
+      "bounding": [
+        -1744.1050076919641,
+        -3034.5188276397334,
+        436.88582734381475,
+        737.6213300488839
+      ],
+      "color": "#A88",
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "INPUTS",
+      "bounding": [
+        -3958.3544095120105,
+        -3435.588403242595,
+        2153.788182161496,
+        1132.2023410874083
+      ],
+      "color": "#8AA",
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Natural Language Prompt + Set Time",
+      "bounding": [
+        -3886.2463789870153,
+        -3343.5784900112894,
+        562.4178462930613,
+        588.9901419873258
+      ],
+      "color": "#8A8",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.21435888100000258,
+      "offset": [
+        6104.163813870495,
+        4535.165685750964
+      ]
+    },
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "release": {
+      "repository": "exportAnything/ComfyUI-MiniMax-FastH3-Workflows",
+      "source_filename": "MiniMax FastH3 Ref2VA RTX DLSS 5 Upscale + Neural Rendering + DiffusionGemma Director.json",
+      "packaged_on": "2026-09-04",
+      "dependency_revisions": {
+        "diffusionGemma": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "dlssTemporal": "81171d18bc2a359d75cace2eadf13efc757d9b2d",
+        "fastH3": "c1798183d89f7143d021c16507e4bb7ac0b3decc",
+        "h3VaeOptimized": "14f3692dbcdec69221808bc30459a22c3e1d821f"
+      }
+    }
+  },
+  "version": 0.4
+}
