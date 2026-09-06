@@ -87,7 +87,7 @@ function validateGraph(workflow, relative) {
 const workflowFiles = filesBelow(path.join(root, "workflows"), (file) =>
   file.endsWith(".json"),
 ).sort();
-assert(workflowFiles.length === 6, `Expected 6 workflows, found ${workflowFiles.length}`);
+assert(workflowFiles.length === 7, `Expected 7 workflows, found ${workflowFiles.length}`);
 
 const workflowIds = new Set();
 for (const file of workflowFiles) {
@@ -150,6 +150,71 @@ assert(
   loadById.get(51)?.endsWith("subject-left.png") &&
     loadById.get(52)?.endsWith("subject-right.png"),
   "Ref2VA standard Picture 2/Picture 3 order is not corrected",
+);
+
+const ultra4k = JSON.parse(
+  fs.readFileSync(
+    path.join(root, "workflows", "t2va", "4k-trtvae-rtx-vsr-ultra.json"),
+    "utf8",
+  ),
+);
+const ultraNodes = new Map(ultra4k.nodes.map((node) => [node.type, node]));
+assert(
+  ultra4k.id === "6af14068-71fd-4c50-b76d-0100e2a4b9f4",
+  "4K TRT/VSR Ultra workflow UUID changed",
+);
+assert(
+  !ultra4k.nodes.some((node) => node.type === "LoadImage"),
+  "4K TRT/VSR Ultra workflow must remain input-free",
+);
+assert(
+  !ultra4k.nodes.some((node) => node.type === "DLSS5NeuralRendering"),
+  "4K TRT/VSR Ultra workflow must remain on its direct RTX VSR path",
+);
+assert(
+  JSON.stringify(ultraNodes.get("ResolutionSelector")?.widgets_values) ===
+    JSON.stringify(["16:9 (Widescreen)", 2, 32]),
+  "4K TRT/VSR Ultra workflow resolution selector changed",
+);
+assert(
+  JSON.stringify(ultraNodes.get("FastH3VSAPatch")?.widgets_values) ===
+    JSON.stringify([10, 0, "error", false, true]),
+  "4K TRT/VSR Ultra workflow FastH3 VSA settings changed",
+);
+assert(
+  JSON.stringify(ultraNodes.get("BasicScheduler")?.widgets_values) ===
+    JSON.stringify(["bong_tangent", 4, 0.85]),
+  "4K TRT/VSR Ultra workflow scheduler settings changed",
+);
+assert(
+  JSON.stringify(
+    ultraNodes.get("MiniMaxH3TRTVAEOptimizedLoader")?.widgets_values,
+  ) ===
+    JSON.stringify([
+      "h3vae_trt\\minimax_h3_vae_decoder.engine",
+      "None",
+      4,
+    ]),
+  "4K TRT/VSR Ultra workflow TensorRT VAE settings changed",
+);
+assert(
+  JSON.stringify(ultraNodes.get("RTXVideoSuperResolution")?.widgets_values) ===
+    JSON.stringify(["target dimensions", 3840, 2160, "ULTRA"]),
+  "4K TRT/VSR Ultra workflow RTX VSR settings changed",
+);
+const ultraVideo = ultraNodes.get("VHS_VideoCombine")?.widgets_values;
+assert(
+  ultraVideo?.frame_rate === 24 &&
+    ultraVideo?.format === "video/nvenc_h264-mp4" &&
+    ultraVideo?.filename_prefix ===
+      "MiniMax_FastH3_T2VA_4K_TRTVAE_RTX_VSR_ULTRA",
+  "4K TRT/VSR Ultra workflow output settings changed",
+);
+const ultraStart = ultra4k.nodes.find((node) => node.id === 100);
+assert(
+  ultraStart?.title ===
+    "START HERE — FAST 01 • MiniMax 2 MP → RTX VSR ULTRA → 4K NVENC H.264",
+  "4K TRT/VSR Ultra workflow output label is inaccurate",
 );
 
 assert(

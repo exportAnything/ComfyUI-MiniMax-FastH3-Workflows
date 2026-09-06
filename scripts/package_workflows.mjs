@@ -76,10 +76,25 @@ const specs = [
     id: "c995996b-bc53-4424-83e2-208306ec688d",
     outputPrefix: "MiniMax_FastH3_T2VA_Director",
   },
+  {
+    source:
+      "Minimax FastH3 4K - 4 Steps in 6 Minutes TRTVAE + RTX VSA Ultra.json",
+    target: "workflows/t2va/4k-trtvae-rtx-vsr-ultra.json",
+    id: "6af14068-71fd-4c50-b76d-0100e2a4b9f4",
+    outputPrefix: "MiniMax_FastH3_T2VA_4K_TRTVAE_RTX_VSR_ULTRA",
+    packagedOn: "2026-09-06",
+    nodeTitleOverrides: {
+      100: "START HERE — FAST 01 • MiniMax 2 MP → RTX VSR ULTRA → 4K NVENC H.264",
+    },
+  },
 ];
 
 function sanitizeNode(node, spec) {
   const properties = node.properties ?? (node.properties = {});
+
+  if (spec.nodeTitleOverrides?.[node.id]) {
+    node.title = spec.nodeTitleOverrides[node.id];
+  }
 
   if (node.type === "FastH3VSAPatch") {
     properties.aux_id = "exportAnything/ComfyUI-FastH3-VSA";
@@ -144,7 +159,7 @@ for (const spec of specs) {
   workflow.extra.release = {
     repository: "exportAnything/ComfyUI-MiniMax-FastH3-Workflows",
     source_filename: spec.source,
-    packaged_on: "2026-09-04",
+    packaged_on: spec.packagedOn ?? "2026-09-04",
     dependency_revisions: revisions,
   };
 

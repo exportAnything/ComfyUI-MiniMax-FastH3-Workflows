@@ -1,0 +1,1204 @@
+{
+  "id": "6af14068-71fd-4c50-b76d-0100e2a4b9f4",
+  "revision": 0,
+  "last_node_id": 113,
+  "last_link_id": 166,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        0,
+        -80
+      ],
+      "size": [
+        619.96875,
+        88.140625
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "title": "Installed FastH3 VSA 4-step model",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "minimax_h3_fastvideo_vsa_datafree_1300step_4step_int8_convrot.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "FastH3VSAPatch",
+      "pos": [
+        720,
+        -80
+      ],
+      "size": [
+        431.859375,
+        217.890625
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            33,
+            34
+          ]
+        },
+        {
+          "name": "preflight",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "FastH3 VSA — trained 10% retained setting",
+      "properties": {
+        "aux_id": "exportAnything/ComfyUI-FastH3-VSA",
+        "ver": "c1798183d89f7143d021c16507e4bb7ac0b3decc",
+        "Node name for S&R": "FastH3VSAPatch"
+      },
+      "widgets_values": [
+        10,
+        0,
+        "error",
+        false,
+        true
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 4,
+      "type": "CLIPLoader",
+      "pos": [
+        0,
+        50
+      ],
+      "size": [
+        619.96875,
+        120
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3
+          ]
+        }
+      ],
+      "title": "MiniMax H3 Qwen3-VL text encoder",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "MiniMaxH3ImageToVideo",
+      "pos": [
+        1210,
+        300
+      ],
+      "size": [
+        432.3125,
+        245.890625
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 139
+        },
+        {
+          "name": "first_frame",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "last_frame",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 166
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "widget": {
+            "name": "width"
+          },
+          "link": 134
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "widget": {
+            "name": "height"
+          },
+          "link": 135
+        },
+        {
+          "name": "length",
+          "type": "INT",
+          "widget": {
+            "name": "length"
+          },
+          "link": 57
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "title": "MiniMax H3 T2VA — no image input",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "MiniMaxH3ImageToVideo"
+      },
+      "widgets_values": [
+        "",
+        640,
+        320,
+        243
+      ]
+    },
+    {
+      "id": 7,
+      "type": "RandomNoise",
+      "pos": [
+        720,
+        190
+      ],
+      "size": [
+        424.25,
+        82.171875
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "title": "Seed",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        1077667263007333,
+        "fixed"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "BasicGuider",
+      "pos": [
+        1220,
+        -80
+      ],
+      "size": [
+        300,
+        58.140625
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 33
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "BasicGuider"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "KSamplerSelect",
+      "pos": [
+        1220,
+        20
+      ],
+      "size": [
+        300,
+        68.140625
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "BasicScheduler",
+      "pos": [
+        1220,
+        130
+      ],
+      "size": [
+        300,
+        128.140625
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 34
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "title": "4-step FastH3 schedule",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "bong_tangent",
+        4,
+        0.85
+      ]
+    },
+    {
+      "id": 11,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1700,
+        -80
+      ],
+      "size": [
+        308.53125,
+        127.765625
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 8
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 9
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 10
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 11
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            13,
+            15
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        1710,
+        400
+      ],
+      "size": [
+        291.09375,
+        53.953125
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 13
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 140
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            162
+          ]
+        }
+      ],
+      "title": "Decode generated 2 MP video frames",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "VAELoader",
+      "pos": [
+        0,
+        220
+      ],
+      "size": [
+        614.953125,
+        61.953125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            72
+          ]
+        }
+      ],
+      "title": "MiniMax H3 audio VAE",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "minimax_h3_audio_vae_fp32.safetensors"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VAEDecodeAudio",
+      "pos": [
+        1710,
+        250
+      ],
+      "size": [
+        224.984375,
+        53.953125
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 15
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 72
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [
+            142
+          ]
+        }
+      ],
+      "title": "Decode generated audio",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "VAEDecodeAudio"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 19,
+      "type": "MarkdownNote",
+      "pos": [
+        -520,
+        -100
+      ],
+      "size": [
+        419.828125,
+        620
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "Generation size reference — 2.0 MP selected",
+      "properties": {},
+      "widgets_values": [
+        "**This workflow selects 2.0 MP / 16:9 / multiple 32 → 1920 × 1088.**\n\n| MP | 16:9 model-grid output |\n|---:|---:|\n| 0.6 | 1056 × 608 |\n| 0.8 | 1216 × 672 |\n| 1.0 | 1376 × 768 |\n| 1.2 | 1504 × 832 |\n| 1.5 | 1664 × 928 |\n| 1.8 | 1824 × 1024 |\n| **2.0** | **1920 × 1088** |\n\nFor a quick smoke test, temporarily use 0.6–1.0 MP. RTX still outputs exact UHD 4K."
+      ],
+      "color": "#222",
+      "bgcolor": "#000"
+    },
+    {
+      "id": 37,
+      "type": "ComfyMathExpression",
+      "pos": [
+        720,
+        560
+      ],
+      "size": [
+        241.203125,
+        0
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "a",
+          "name": "values.a",
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": 164
+        },
+        {
+          "label": "b",
+          "name": "values.b",
+          "shape": 7,
+          "type": "FLOAT,INT,BOOLEAN",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": null
+        },
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            57
+          ]
+        },
+        {
+          "name": "BOOL",
+          "type": "BOOLEAN",
+          "links": null
+        }
+      ],
+      "title": "Duration → valid 24 fps frame count",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.30.1",
+        "Node name for S&R": "ComfyMathExpression"
+      },
+      "widgets_values": [
+        "max(5, round(a * 24)) + (5 - (max(5, round(a * 24)) % 17)) % 17"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "RTXVideoSuperResolution",
+      "pos": [
+        2203.626142009837,
+        333.2919085085548
+      ],
+      "size": [
+        389.828125,
+        169.90625
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 162
+        }
+      ],
+      "outputs": [
+        {
+          "name": "upscaled_images",
+          "type": "IMAGE",
+          "links": [
+            161
+          ]
+        }
+      ],
+      "title": "RTX VSR ULTRA — exact UHD 4K",
+      "properties": {
+        "cnr_id": "comfyui_nvidia_rtx_nodes",
+        "ver": "0.1.3",
+        "Node name for S&R": "RTXVideoSuperResolution"
+      },
+      "widgets_values": [
+        "target dimensions",
+        3840,
+        2160,
+        "ULTRA"
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 52,
+      "type": "PrimitiveStringMultiline",
+      "pos": [
+        575.4863149242851,
+        653.4583792783616
+      ],
+      "size": [
+        623.28125,
+        334.171875
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            166
+          ]
+        }
+      ],
+      "title": "1. Creative brief",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.24.0",
+        "Node name for S&R": "PrimitiveStringMultiline"
+      },
+      "widgets_values": [
+        "integrated_multimodal_description: [Shot 1] Realistic live-action practical film photography. A vertical split-screen composition features two sportscasts in a high-tech studio environment. On the left, a charismatic man in a sharp navy suit with a headset leans forward aggressively, gesturing wildly with his hands as he argues. On the right, a woman in a professional blazer and gold earrings leans back, rolling her eyes and dismissively while shaking her head in disbelief. Both are situated in front of blurred digital LED screens displaying basketball statistics and glowing heat maps. The man (S1) shouts, <d>[English]\"If we let a guy who can jump through the backboard play, the game is dead!</d>. The woman (S2) retorts with a sharp laugh, <d>[English]\"It's called evolution, Marcus, you're just scared!</d>. The lighting is bright studio-key with cool rim lights. The camera remains locked-off in a stable view, maintaining the perfect split-screen throughout.\n\noverall_soundscape: The low hum of studio cooling fans, the rhythmic rustle of clothing during energetic gestures, and the sharp thumping of hands hitting a desk.\n\nnon_diegetic_music: N/A"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 61,
+      "type": "ResolutionSelector",
+      "pos": [
+        720,
+        330
+      ],
+      "size": [
+        423.5625,
+        172.984375
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "showAdvanced": true,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            134
+          ]
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            135
+          ]
+        }
+      ],
+      "title": "2.0 MP • 16:9 • model grid 32",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.33.1",
+        "Node name for S&R": "ResolutionSelector"
+      },
+      "widgets_values": [
+        "16:9 (Widescreen)",
+        2,
+        32
+      ],
+      "color": "#223",
+      "bgcolor": "#335"
+    },
+    {
+      "id": 62,
+      "type": "MiniMaxH3TRTVAEOptimizedLoader",
+      "pos": [
+        0,
+        330
+      ],
+      "size": [
+        611.109375,
+        141.90625
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            139,
+            140
+          ]
+        }
+      ],
+      "title": "Optimized TensorRT video VAE decoder",
+      "properties": {
+        "ver": "14f3692dbcdec69221808bc30459a22c3e1d821f",
+        "Node name for S&R": "MiniMaxH3TRTVAEOptimizedLoader",
+        "aux_id": "exportAnything/ComfyUI-H3VAE_TRT-Optimized"
+      },
+      "widgets_values": [
+        "h3vae_trt\\minimax_h3_vae_decoder.engine",
+        "None",
+        4
+      ]
+    },
+    {
+      "id": 24,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        2767.3942388582986,
+        -48.540612444793226
+      ],
+      "size": [
+        1303.90625,
+        1133.625
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 161
+        },
+        {
+          "name": "audio",
+          "shape": 7,
+          "type": "AUDIO",
+          "link": 142
+        },
+        {
+          "name": "meta_batch",
+          "shape": 7,
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "shape": 7,
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null
+        }
+      ],
+      "title": "4K NVENC H.264 preview",
+      "properties": {
+        "cnr_id": "comfyui-videohelpersuite",
+        "ver": "1.7.9",
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "MiniMax_FastH3_T2VA_4K_TRTVAE_RTX_VSR_ULTRA",
+        "format": "video/nvenc_h264-mp4",
+        "pix_fmt": "yuv420p",
+        "bitrate": 30,
+        "megabit": true,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true
+      },
+      "color": "#20334b",
+      "bgcolor": "#142237"
+    },
+    {
+      "id": 100,
+      "type": "MarkdownNote",
+      "pos": [
+        -38.800736377701924,
+        -366.2728153865153
+      ],
+      "size": [
+        671.265625,
+        170.03125
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "START HERE — FAST 01 • MiniMax 2 MP → RTX VSR ULTRA → 4K NVENC H.264",
+      "properties": {},
+      "widgets_values": [
+        "# FAST 01 — speed-first 4K master\n\n1. Edit **Creative brief** and **Duration seconds**.\n2. MiniMax FastH3 T2VA generates at **2.0 MP, 16:9, 24 fps** using the installed 4-step VSA model.\n3. Video is decoded once and sent **directly** to RTX Video Super Resolution: **ULTRA, exact 3840 × 2160**.\n4. MiniMax's generated audio is decoded separately and attached to the branch.\n"
+      ],
+      "color": "#23333b",
+      "bgcolor": "#122027"
+    },
+    {
+      "id": 113,
+      "type": "PrimitiveFloat",
+      "pos": [
+        9.165098895825565,
+        544.893367496447
+      ],
+      "size": [
+        337.875,
+        79.828125
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            164
+          ]
+        }
+      ],
+      "title": "2. Duration seconds (shared)",
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.7.0",
+        "Node name for S&R": "PrimitiveFloat",
+        "enableTabs": false,
+        "tabWidth": 65,
+        "tabXOffset": 10,
+        "hasSecondTab": false,
+        "secondTabText": "Send Back",
+        "secondTabOffset": 80,
+        "secondTabWidth": 65
+      },
+      "widgets_values": [
+        10
+      ],
+      "color": "#223322",
+      "bgcolor": "#355335"
+    }
+  ],
+  "links": [
+    [
+      3,
+      4,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      6,
+      0,
+      8,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      8,
+      7,
+      0,
+      11,
+      0,
+      "NOISE"
+    ],
+    [
+      9,
+      8,
+      0,
+      11,
+      1,
+      "GUIDER"
+    ],
+    [
+      10,
+      9,
+      0,
+      11,
+      2,
+      "SAMPLER"
+    ],
+    [
+      11,
+      10,
+      0,
+      11,
+      3,
+      "SIGMAS"
+    ],
+    [
+      12,
+      6,
+      1,
+      11,
+      4,
+      "LATENT"
+    ],
+    [
+      13,
+      11,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      11,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      1,
+      0,
+      2,
+      0,
+      "MODEL"
+    ],
+    [
+      33,
+      2,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      34,
+      2,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      57,
+      37,
+      1,
+      6,
+      7,
+      "INT"
+    ],
+    [
+      72,
+      16,
+      0,
+      17,
+      1,
+      "VAE"
+    ],
+    [
+      134,
+      61,
+      0,
+      6,
+      5,
+      "INT"
+    ],
+    [
+      135,
+      61,
+      1,
+      6,
+      6,
+      "INT"
+    ],
+    [
+      139,
+      62,
+      0,
+      6,
+      1,
+      "VAE"
+    ],
+    [
+      140,
+      62,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      142,
+      17,
+      0,
+      24,
+      1,
+      "AUDIO"
+    ],
+    [
+      161,
+      45,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      162,
+      12,
+      0,
+      45,
+      0,
+      "IMAGE"
+    ],
+    [
+      164,
+      113,
+      0,
+      37,
+      0,
+      "FLOAT"
+    ],
+    [
+      166,
+      52,
+      0,
+      6,
+      4,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "1 — MiniMax FastH3 T2VA • 2.0 MP • 24 fps • 4 steps",
+      "bounding": [
+        -40,
+        -140,
+        2100,
+        1100
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "2 — RTX VSR ULTRA • exact 3840 × 2160",
+      "bounding": [
+        2140,
+        220,
+        520,
+        340
+      ],
+      "color": "#8a6d3b",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "3 — 4K output • NVENC preview",
+      "bounding": [
+        2700,
+        -140,
+        1430,
+        840
+      ],
+      "color": "#4d8154",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.35049389948139237,
+      "offset": [
+        555.4248281371802,
+        831.3249449182264
+      ]
+    },
+    "frontendVersion": "1.48.7",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true,
+    "release": {
+      "repository": "exportAnything/ComfyUI-MiniMax-FastH3-Workflows",
+      "source_filename": "Minimax FastH3 4K - 4 Steps in 6 Minutes TRTVAE + RTX VSA Ultra.json",
+      "packaged_on": "2026-09-06",
+      "dependency_revisions": {
+        "diffusionGemma": "431f3965dbb0dfe85177e6d7d9d3b79bd4919663",
+        "dlssTemporal": "81171d18bc2a359d75cace2eadf13efc757d9b2d",
+        "fastH3": "c1798183d89f7143d021c16507e4bb7ac0b3decc",
+        "h3VaeOptimized": "14f3692dbcdec69221808bc30459a22c3e1d821f"
+      }
+    }
+  },
+  "version": 0.4
+}
