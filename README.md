@@ -1,6 +1,6 @@
 # ComfyUI MiniMax FastH3 Workflows
 
-Seven MiniMax H3 audio-video workflows for ComfyUI: T2VA, FLF2VA, and Ref2VA in direct-prompt and DiffusionGemma Director editions, plus a speed-first 4K T2VA workflow.
+Eight MiniMax H3 audio-video workflows for ComfyUI: T2VA, FLF2VA, and Ref2VA in direct-prompt and DiffusionGemma Director editions, plus a speed-first 4K T2VA workflow and the original five-second FastH3 preset.
 
 ## Asset-free distribution
 
@@ -16,6 +16,8 @@ This repository intentionally contains **no images, video, audio, expected outpu
 
 The additional [`workflows/t2va/4k-trtvae-rtx-vsr-ultra.json`](workflows/t2va/4k-trtvae-rtx-vsr-ultra.json) preset is input-free T2VA. It retains the saved four-step FastH3 schedule, optimized TensorRT decoder, 2.0 MP generation grid, and RTX Video Super Resolution in `ULTRA` mode at exactly 3840 × 2160. Its runtime is hardware-dependent.
 
+[`workflows/t2va/fasth3_5sec_in_5sec.json`](workflows/t2va/fasth3_5sec_in_5sec.json) is the original export, preserved byte-for-byte with all settings and prompts intact. Its [model and setup notes](workflows/t2va/fasth3_5sec_in_5sec.md) list all six selected model artifacts, the retained inactive checkpoint reference, and the required TensorRT loader and scheduler dependencies. The filename is not a runtime guarantee.
+
 ## Install dependencies
 
 Install the exact node revisions and model files listed in [`DEPENDENCIES.md`](DEPENDENCIES.md). The workflow-specific repositories are:
@@ -23,9 +25,9 @@ Install the exact node revisions and model files listed in [`DEPENDENCIES.md`](D
 - [ComfyUI-FastH3-VSA](https://github.com/exportAnything/ComfyUI-FastH3-VSA) at `c179818`
 - [ComfyUI-DLSS5-NR-Temporal](https://github.com/exportAnything/ComfyUI-DLSS5-NR-Temporal) at `81171d1` for the six standard/Director workflows
 - [ComfyUI-DiffusionGemmaPromptBuilder](https://github.com/exportAnything/ComfyUI-DiffusionGemmaPromptBuilder) at `431f396` for Director editions
-- [ComfyUI-H3VAE_TRT-Optimized](https://github.com/exportAnything/ComfyUI-H3VAE_TRT-Optimized) at `14f3692` for T2VA
+- [ComfyUI-H3VAE_TRT-Optimized](https://github.com/exportAnything/ComfyUI-H3VAE_TRT-Optimized) at `14f3692` for the standard, Director, and 4K T2VA presets
 
-A fresh T2VA setup also needs [lihaoyun6/ComfyUI-H3VAE_TRT](https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT) once to compile the fixed-B1 decoder engine. The upstream pack is not used by the packaged generation graphs after the engine exists.
+A fresh standard, Director, or 4K T2VA setup also needs [lihaoyun6/ComfyUI-H3VAE_TRT](https://github.com/lihaoyun6/ComfyUI-H3VAE_TRT) once to compile the fixed-B1 decoder engine. The five-second preset uses that upstream pack during generation and selects both encoder and decoder engines; follow its [setup notes](workflows/t2va/fasth3_5sec_in_5sec.md).
 
 ## First run
 
@@ -42,7 +44,7 @@ The workflows retain their saved graph topology and generation settings, but no 
 node scripts\verify_repository.mjs
 ```
 
-The verifier checks all seven graphs, dependency revisions, portable paths, generic input placeholders, the 4K preset's critical settings, and confirms that the repository has no `assets/` directory.
+The verifier checks all eight top-level graphs, dependency revisions, portable paths, generic input placeholders, the 4K preset's critical settings, and confirms that the repository has no `assets/` directory. A SHA-256 check also protects the five-second export, including its subgraph and saved settings, from modification.
 
 ## License
 

@@ -1,6 +1,8 @@
 # Dependencies
 
-This file records the versions represented by the seven workflows as of 2026-09-06. Install the workflow-specific repositories at their exact revisions first; use each repository's own installation instructions for native builds and Python packages.
+This file records the versions represented by the original seven workflows as of 2026-09-06. Install the workflow-specific repositories at their exact revisions first; use each repository's own installation instructions for native builds and Python packages.
+
+The additional [`fasth3_5sec_in_5sec.json`](workflows/t2va/fasth3_5sec_in_5sec.json) export has separate [model and setup notes](workflows/t2va/fasth3_5sec_in_5sec.md), including its Turbo LoRA, upstream TensorRT encoder/decoder loader, and RES4LYF scheduler dependency. The scope of the tables below remains the original seven presets.
 
 ## Workflow-specific repositories
 

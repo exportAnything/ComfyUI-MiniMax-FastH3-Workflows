@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -87,7 +88,14 @@ function validateGraph(workflow, relative) {
 const workflowFiles = filesBelow(path.join(root, "workflows"), (file) =>
   file.endsWith(".json"),
 ).sort();
-assert(workflowFiles.length === 7, `Expected 7 workflows, found ${workflowFiles.length}`);
+assert(workflowFiles.length === 8, `Expected 8 workflows, found ${workflowFiles.length}`);
+
+assert(
+  createHash("sha256")
+    .update(fs.readFileSync(path.join(root, "workflows", "t2va", "fasth3_5sec_in_5sec.json")))
+    .digest("hex") === "f33796d9d5844330102d1cbd3a11afa21d5ac413c1b88afc0d0a585bf8ed4a69",
+  "Five-second FastH3 workflow must remain byte-for-byte identical to the original export",
+);
 
 const workflowIds = new Set();
 for (const file of workflowFiles) {
